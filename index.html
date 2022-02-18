@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>np-casino-vault-calculator</title>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+
+  <body>
+    <h1 class="header">Casino Vault Calculator</h1>
+
+    <div class="container">
+      <div class="content">
+        <label for="a-val">A: </label>
+        <br />
+        <input
+          type="text"
+          id="a-val"
+          name="a-val"
+          oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+        />
+        <br />
+
+        <label for="b-val">B: </label>
+        <br />
+        <input
+          type="text"
+          id="b-val"
+          name="b-val"
+          oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+        />
+        <br />
+
+        <label for="c-val">C: </label>
+        <br />
+        <input
+          type="text"
+          id="c-val"
+          name="c-val"
+          oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+        />
+        <br />
+        <br />
+
+        <label for="eqns-val">Equations: </label>
+        <br />
+        <textarea
+          style="width: 100%"
+          id="eqns-val"
+          name="eqns-val"
+          cols="100"
+          rows="10"
+        ></textarea>
+        <br />
+
+        <div class="note">
+          <b>Note:</b> Just copy and paste the question. Must includes all four
+          equations with = ?
+        </div>
+        <br />
+
+        <input type="reset" value="Reset" onclick="reset()" />
+        <input type="submit" value="Calculate" onclick="calculate()" />
+
+        <br />
+        <br />
+        <br />
+        <div id="loader" class="loader">Loading...</div>
+        <div class="answers" id="answers">Answers: []</div>
+      </div>
+    </div>
+    <script src="fn.js"></script>
+  </body>
+</html>
