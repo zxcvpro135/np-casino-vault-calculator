@@ -41,10 +41,10 @@ const mathMap = (expr) => {
  */
 const mathCalc = async (a, b, c, exprStr) => {
   const exprTrim = exprStr.replace(/\s+/g, "");
-  const exprValA = exprTrim.replace(/A/g, a);
-  const exprValB = exprValA.replace(/B/g, b);
-  const exprValC = exprValB.replace(/C/g, c);
-  const exprValX = exprValC.replace(/x/g, "*");
+  const exprValA = exprTrim.replace(/A/gi, a);
+  const exprValB = exprValA.replace(/B/gi, b);
+  const exprValC = exprValB.replace(/C/gi, c);
+  const exprValX = exprValC.replace(/X/gi, "*");
 
   const exprSplit = exprValX.split("=?");
   const exprArr = exprSplit.filter((x) => x);
