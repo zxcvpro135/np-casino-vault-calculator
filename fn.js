@@ -13,6 +13,7 @@ const mathAPI = async (expr) => {
   if (res.status === 400) {
     throw new Error("math error: invalid equations format");
   }
+
   return res.json();
 };
 
@@ -49,24 +50,20 @@ const mathCalc = async (a, b, c, exprStr) => {
   const exprSplit = exprValX.split("=?");
   const exprArr = exprSplit.filter((x) => x);
 
-  if (exprArr.length === 4) {
-    const answers = [];
+  const answers = [];
 
-    for (const exprVal of exprArr) {
-      const question = mathMap(exprVal);
-      const answer = await mathAPI(question);
+  for (const exprVal of exprArr) {
+    const question = mathMap(exprVal);
+    const answer = await mathAPI(question);
 
-      answers.push(answer);
-    }
-
-    console.log(exprStr);
-    console.log(exprArr);
-    console.log(answers);
-
-    return answers;
+    answers.push(answer);
   }
 
-  throw new Error("math error: invalid equations format");
+  console.log(exprStr);
+  console.log(exprArr);
+  console.log(answers);
+
+  return answers;
 };
 
 const reset = () => {
