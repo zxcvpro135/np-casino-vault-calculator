@@ -22,15 +22,18 @@ const mathAPI = async (expr) => {
  * @returns {string}
  */
 const mathMap = (expr) => {
-  const isModExpr = expr.match(/(\d+mod\d+)/g);
+  const matchs = expr.match(/(\d+mod\d+)/g) || [];
 
-  if (isModExpr) {
-    const nums = expr.split("mod");
+  let exprMod = expr;
+
+  for (const match of matchs) {
+    const nums = match.split("mod");
     const [x, y] = nums;
-    return expr.replace(/(\d+mod\d+)/g, `(${x}-${y}*floor(${x}/${y}))`);
+    const replaceRegExp = new RegExp(`(${match})`, "g");
+    exprMod = exprMod.replace(replaceRegExp, `(${x}-${y}*floor(${x}/${y}))`);
   }
 
-  return expr;
+  return exprMod;
 };
 
 /**
@@ -85,16 +88,28 @@ const calculate = async () => {
 
   try {
     const aval = parseFloat(document.getElementById("a-val").value);
-    if (!aval) throw new Error("missing input: A value");
+
+    if (typeof aval !== "number" || isNaN(aval)) {
+      throw new Error("missing input: A value");
+    }
 
     const bval = parseFloat(document.getElementById("b-val").value);
-    if (!bval) throw new Error("missing input: B value");
+
+    if (typeof bval !== "number" || isNaN(bval)) {
+      throw new Error("missing input: B value");
+    }
 
     const cval = parseFloat(document.getElementById("c-val").value);
-    if (!cval) throw new Error("missing input: C value");
+
+    if (typeof cval !== "number" || isNaN(cval)) {
+      throw new Error("missing input: C value");
+    }
 
     const eqns = document.getElementById("eqns-val").value;
-    if (!eqns) throw new Error("missing input: equations");
+
+    if (!eqns) {
+      throw new Error("missing input: equations");
+    }
 
     document.getElementById("answers").style.display = "none";
     isLoading = true;
